@@ -1,0 +1,31 @@
+
+#! Chiamata normale
+GET http://localhost:5069/resources
+
+###########################################################################################################################
+#! Chiamata delle resources attive
+GET http://localhost:5069/resource/active
+
+###########################################################################################################################
+#! Chiamata delle resources di età maggiore di 26
+GET http://localhost:5069/resource/age26
+
+###########################################################################################################################
+#! Chiamata delle resources di età compresa tra 26 e 30
+GET http://localhost:5069/resource/age26-30
+
+###########################################################################################################################
+#! Chiamata delle resources con occhi Blue OPPURE Brown
+GET http://localhost:5069/resource/eyeColor
+
+###########################################################################################################################
+#! Chiamata delle resources che NON contengono occhi VERDI
+GET http://localhost:5069/resource/eyeColorNotGreen
+
+###########################################################################################################################
+#! Chiamata delle resources che NON contengono occhi VERDI E BLUE
+GET http://localhost:5069/resource/eyeColorNotGreenAndBlue
+
+###########################################################################################################################
+#! Chiamata delle resources con compagnia FITCORE
+GET http://localhost:5069/resource/fitcore

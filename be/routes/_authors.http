@@ -1,0 +1,23 @@
+POST http://localhost:5069/authors
+Content-Type: application/json
+
+{
+    "name": "Marcello",
+    "surname": "Pastore",
+    "password": "Parapappero190",
+    "email": "marcellopastore@gmail.com",
+    "dob": "05-01-2002",
+    "avatar": "Mark.jpeg"
+}
+
+#####
+GET http://localhost:5069/authors
+
+#####
+GET http://localhost:5069/authors/byName?authorName=Marcello
+
+#####
+GET http://localhost:5069/authors/64b80d67fe6dbff728e58658/posts
+
+
+
