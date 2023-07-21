@@ -26,6 +26,11 @@ const AuthorModelSchema = mongoose.Schema({
         type: String,
         requires: true 
     },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+        default: []
+    }]
 }, {timestamps: true, strict:true});
 
 module.exports = mongoose.model("Author", AuthorModelSchema, "authors");

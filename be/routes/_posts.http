@@ -6,23 +6,20 @@ POST http://localhost:5069/posts
 Content-Type: application/json
 
 {
-    "category": "horror",
-    "title": "Titolo post 21",
+    "category": "Referencing",
+    "title": "Post con referencing",
     "cover": "immagine.jpeg",
     "readTime": {
         "value": 2,
         "unit": "minutes"
     },
-    "author": {
-        "name": "Marcello",
-        "avatar": "Mistiko"
-    },
+    "author": "64baad4c869881bd816d0f85",
     "content": "Ciao sono marciellooooooooo"
 }
 
 ####
 
-GET http://localhost:5069/posts/title?postTitle=21
+GET http://localhost:5069/posts/title?postTitle=refe
 
 
 ####

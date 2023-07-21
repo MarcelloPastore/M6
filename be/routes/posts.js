@@ -15,6 +15,7 @@ post.get("/posts/title", async (req, res) => {
                 $options: 'i',
             }
         })
+        .populate("author", "name surname avatar");
         if (!postByTitle || postByTitle.length <= 0) {
             return res.status(404).send({
                 statusCode: 404,
@@ -43,6 +44,7 @@ post.get('/posts', async (req, res) => {
         const post = await PostModel.find()
         .limit(pageSize)
         .skip((page -1) * pageSize)
+        .populate("author", "name surname avatar")
         ;
 
         const totalPosts = await PostModel.count()
@@ -71,6 +73,7 @@ post.get("/posts/:postId", async (req, res) => {
 
     try {
         const postById = await PostModel.findById(postId)
+        .populate("author", "name surname avatar");
         res.status(200).send({
             statusCode: 200,
             payload: postById
