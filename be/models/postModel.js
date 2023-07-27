@@ -2,25 +2,22 @@ const mongoose = require('mongoose');
 
 const PostModelSchema = mongoose.Schema({
     category: {
-        type: String,
-        required: true,
+        type: String
     },
     title: {
         type: String,
-        required: true,
     },
     cover: {
         type: String,
-        required: true,
     },
     readTime: {
         value: {
         type: Number,
-        required: false,
+        default: 0
         },
         unit: {
         type: String,
-        required: false,
+        default: 'minutes'
         },
     },
     author: {
@@ -29,7 +26,6 @@ const PostModelSchema = mongoose.Schema({
     },
     content: {
         type: String,
-        required: true,
     },
 }, {timestamps: true, strict: true});
 

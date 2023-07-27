@@ -2,19 +2,19 @@ GET http://localhost:5069/posts
 
 ####
 
-POST http://localhost:5069/posts
+POST http://localhost:5069/posts/create
 Content-Type: application/json
 
 {
-    "category": "Referencing",
-    "title": "Post con referencing",
+    "category": "Referencing 3",
+    "title": "Post con referencing terzo test",
     "cover": "immagine.jpeg",
     "readTime": {
-        "value": 2,
-        "unit": "minutes"
+        "value": 5,
+        "unit": "seconds"
     },
-    "author": "64baad4c869881bd816d0f85",
-    "content": "Ciao sono marciellooooooooo"
+    "author": "64bac6cfc811ace5c3535d66",
+    "content": "scemochilegge kekw (ma più lungo altrimenti va in errore hahaha)"
 }
 
 ####

@@ -1,7 +1,37 @@
 const express = require('express');
 const PostModel = require('../models/postModel');
 const { postBodyParams, validatePostBody } = require('../middlewares/postValidation');
+const AuthorModel = require('../models/authorModel');
 const post = express.Router();
+const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+const internalStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = `${new Date().toISOString()}-${crypto.randomUUID()}`;
+        const fileExt = file.originalname.split('.').pop();
+        cs(null, `${file.fieldname}-${uniqueSuffix}.${fileExt}`);
+    },
+});
+
+const uploads = multer({ storage: internalStorage });
+
+post.post('/post/internalUpload', uploads.single('cover'), async (req, res) => {
+    try {
+        res.status(200).json({ img: req.file.path });
+    } catch (error) {
+        console.error('Fileupload failed');
+        res.status(500).send({
+            statusCode: 500,
+            message: 'Upload not completed successfully'
+        })
+    }
+});
+
 
 // ! -----------------------------------------------------------------------------------------------------
 // ! Chiamata get singolo elemento RICERCATO
@@ -89,20 +119,23 @@ post.get("/posts/:postId", async (req, res) => {
 
 // ! -----------------------------------------------------------------------------------------------------
 // ! Chiamata post
-post.post('/posts', postBodyParams, validatePostBody, async (req, res) => {
+post.post('/posts/create', postBodyParams, validatePostBody, async (req, res) => {
+
+
+    const user = await AuthorModel.findOne({_id: req.body.author});
 
     const newPost = new PostModel({
         category: req.body.category,
         title: req.body.title,
         cover: req.body.cover,
         readTime: req.body.readTime,
-        author: req.body.author,
+        author: user._id,
         content: req.body.content,
     });
 
     try {
         const post = await newPost.save();
-
+        await AuthorModel.updateOne({_id: user._id}, {$push: {posts: post }})
         res.status(201).send({
             statusCode: 201,
             message: "Post saved successfully",

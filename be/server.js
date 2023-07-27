@@ -11,6 +11,9 @@ const postsRoute = require('./routes/posts');
 const authorsRoute = require('./routes/authors');
 const loginRoute = require('./routes/login');
 const resourcesRoute = require('./routes/resources');
+const moviesRoute = require('./routes/movies');
+const path = require('path');
+const cors = require('cors');
 
 // ?require delle middleware
 const logger = require('./middlewares/logger');
@@ -26,11 +29,17 @@ app.use(express.json());
 app.use(logger)
 app.use(cacheMiddleware)
 
+app.use('/uploads', express.static(path.join(__dirname, './uploads')));
+
+app.use(cors());
+
+
 // * import routes
 app.use('/', postsRoute);
 app.use('/', authorsRoute);
 app.use('/', loginRoute);
 app.use('/', resourcesRoute);
+app.use('/', moviesRoute);
 
 mongoose.connect(process.env.MONGO_DB_URL);
 

@@ -1,4 +1,7 @@
-POST http://localhost:5069/authors
+GET http://localhost:5069/authors
+
+#####
+POST http://localhost:5069/authors/create
 Content-Type: application/json
 
 {
@@ -9,9 +12,6 @@ Content-Type: application/json
     "dob": "05-01-2002",
     "avatar": "Mark.jpeg"
 }
-
-#####
-GET http://localhost:5069/authors
 
 #####
 GET http://localhost:5069/authors/byName?authorName=Marcello

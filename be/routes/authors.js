@@ -10,6 +10,7 @@ author.get('/authors', async (req, res) => {
 
     try {
         const authors = await AuthorModel.find()
+        .populate("posts", "category title content")
         res.status(200).send({
             statusCode: 200,
             authors
@@ -99,7 +100,7 @@ author.get('/authors/:id', async (req, res) => {
 
 // ! -----------------------------------------------------------------------------------------------------
 // ! Chiamata post
-author.post('/authors', async (req, res) => {
+author.post('/authors/create', async (req, res) => {
 
     const salt = await bcrypt.genSalt(10)  // complessità algoritmo
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
