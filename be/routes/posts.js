@@ -7,6 +7,8 @@ const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
+
+
 const internalStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads')
@@ -14,7 +16,7 @@ const internalStorage = multer.diskStorage({
     filename: (req, file, cb) => {
         const uniqueSuffix = `${new Date().toISOString()}-${crypto.randomUUID()}`;
         const fileExt = file.originalname.split('.').pop();
-        cs(null, `${file.fieldname}-${uniqueSuffix}.${fileExt}`);
+        cb(null, `${file.fieldname}-${uniqueSuffix}.${fileExt}`);
     },
 });
 

@@ -24,6 +24,8 @@ require("dotenv").config();
 
 const app = express();
 
+// * cors
+app.use(cors());
 // * middelware
 app.use(express.json());
 app.use(logger)
@@ -31,7 +33,7 @@ app.use(cacheMiddleware)
 
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 
-app.use(cors());
+
 
 
 // * import routes
